@@ -9,24 +9,45 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ubu.gii.dass.c01.Reusable;
+import ubu.gii.dass.c01.ReusablePool;
+
 /**
- * @author alumno
+ * @author Antoni Lluis García Expósito - Alejandro Goicoechea Román
  *
  */
 public class ReusablePoolTest {
 
+	/** Pool contenedor de los objetos reusables. */
+	private ReusablePool pool;
+
+	/** Objeto reusable A. */
+	private Reusable reusableA;
+
+	/** Objeto reusable B. */
+	private Reusable reusableB;
+
 	/**
+	 * Inicializamos una instancia para ser reusada a posteriori.
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		pool = ReusablePool.getInstance();
+		reusableA = pool.acquireReusable();
+		reusableB = pool.acquireReusable();
 	}
 
 	/**
+	 * Liberamos las instancias reusadas.
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@After
 	public void tearDown() throws Exception {
+		pool.releaseReusable(reusableA);
+		pool.releaseReusable(reusableB);
 	}
 
 	/**
@@ -34,7 +55,8 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testGetInstance() {
-		fail("Not yet implemented");
+		ReusablePool instanciaPool = ReusablePool.getInstance();
+
 	}
 
 	/**
@@ -46,7 +68,8 @@ public class ReusablePoolTest {
 	}
 
 	/**
-	 * Test method for {@link ubu.gii.dass.c01.ReusablePool#releaseReusable(ubu.gii.dass.c01.Reusable)}.
+	 * Test method for
+	 * {@link ubu.gii.dass.c01.ReusablePool#releaseReusable(ubu.gii.dass.c01.Reusable)}.
 	 */
 	@Test
 	public void testReleaseReusable() {

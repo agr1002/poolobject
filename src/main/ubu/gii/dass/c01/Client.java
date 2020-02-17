@@ -19,7 +19,6 @@ public class Client{
 	 
 	  logger.info(r1.util());
 	  logger.info(r2.util());
-	   
 	
 	  	  
 	  pool.releaseReusable(r2);
