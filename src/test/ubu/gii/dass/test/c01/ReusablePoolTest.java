@@ -34,6 +34,7 @@ public class ReusablePoolTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		
 		pool = ReusablePool.getInstance();
 		reusableA = pool.acquireReusable();
 		reusableB = pool.acquireReusable();
@@ -57,8 +58,21 @@ public class ReusablePoolTest {
 	public void testGetInstance() {
 		ReusablePool instanciaPool = ReusablePool.getInstance();
 
-	}
+		/*
+		 * Comprobamos que la instancia global pool y la instancia local instanciaPool
+		 * son de tipo ReusablePool.
+		 */
+		assertTrue(pool instanceof ReusablePool);
+		assertTrue(instanciaPool instanceof ReusablePool);
 
+		/*
+		 * Comprobamos que ambas instancias tienen mismos valores y que, además, se
+		 * tratan del mismo objeto (esto es, no son nuevas instancias, o sea, se cumple
+		 * el patrón Singleton).
+		 */
+		assertTrue((pool == instanciaPool) && (pool.equals(instanciaPool)));
+	}
+	
 	/**
 	 * Test method for {@link ubu.gii.dass.c01.ReusablePool#acquireReusable()}.
 	 */

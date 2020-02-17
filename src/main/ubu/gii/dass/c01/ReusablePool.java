@@ -19,8 +19,8 @@ public final class ReusablePool{
 	}
 
 	/**
-	 * Método singleton que crea u obtiene la única instancia del Pool que gestiona dos objetos Reusables
-	 * @return la instancia única del Pool 
+	 * Metodo singleton que crea u obtiene la unica instancia del Pool que gestiona dos objetos Reusables
+	 * @return la instancia unica del Pool 
 	 * 
 	 */
 	public static ReusablePool getInstance(){
