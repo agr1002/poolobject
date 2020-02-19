@@ -78,6 +78,7 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testAcquireReusable() {
+		//Comentario vacio
 		fail("Not yet implemented");
 	}
 
