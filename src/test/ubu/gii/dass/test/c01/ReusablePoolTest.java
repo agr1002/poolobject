@@ -27,7 +27,7 @@ public class ReusablePoolTest {
 
 	/** Vector de objetos de tipo Reusable. */
 	private Vector<Reusable> vector;
-	
+
 	/**
 	 * Inicializamos una instancia para ser reusada a posteriori.
 	 * 
@@ -46,7 +46,7 @@ public class ReusablePoolTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		for(Reusable reusable: vector) {
+		for (Reusable reusable : vector) {
 			pool.releaseReusable(reusable);
 		}
 	}
@@ -70,17 +70,19 @@ public class ReusablePoolTest {
 		 * tratan del mismo objeto (esto es, no son nuevas instancias, o sea, se cumple
 		 * el patrón Singleton).
 		 */
-		assertTrue("No se cumple el patrón Singleton ya que hay más de una instancia.", (pool == instanciaPool) && (pool.equals(instanciaPool)));
+		assertTrue("No se cumple el patrón Singleton ya que hay más de una instancia.",
+				(pool == instanciaPool) && (pool.equals(instanciaPool)));
 	}
 
 	/**
 	 * Test method for {@link ubu.gii.dass.c01.ReusablePool#acquireReusable()}.
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@Test
 	public void testAcquireReusable() {
 		try {
-			for(int i = 0; i < 3; i++) {
+			for (int i = 0; i < 3; i++) {
 				vector.add(pool.acquireReusable());
 			}
 		} catch (NotFreeInstanceException ex) {
@@ -91,17 +93,29 @@ public class ReusablePoolTest {
 	/**
 	 * Test method for
 	 * {@link ubu.gii.dass.c01.ReusablePool#releaseReusable(ubu.gii.dass.c01.Reusable)}.
-	 * @throws NotFreeInstanceException, DuplicatedInstanceException 
+	 * 
+	 * @throws NotFreeInstanceException, DuplicatedInstanceException
 	 */
 	@Test
 	public void testReleaseReusable() throws NotFreeInstanceException, DuplicatedInstanceException {
 		Reusable reusable1 = pool.acquireReusable();
 		Reusable reusable2 = pool.acquireReusable();
-		pool.releaseReusable(reusable1);
-		pool.releaseReusable(reusable2);
+
+		try {
+			pool.releaseReusable(reusable1);
+			pool.releaseReusable(reusable2);
+		} catch (DuplicatedInstanceException ex) {
+			System.out.println("Instancia duplicada");
+		}
+
 		reusable1 = pool.acquireReusable();
 		reusable2 = pool.acquireReusable();
-		pool.releaseReusable(reusable1);
-		pool.releaseReusable(reusable2);
+
+		try {
+			pool.releaseReusable(reusable1);
+			pool.releaseReusable(reusable2);
+		} catch (DuplicatedInstanceException ex) {
+			System.out.println("Instancia duplicada");
+		}
 	}
 }
